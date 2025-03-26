@@ -1,0 +1,119 @@
+#include <iostream>
+using namespace std;
+
+// Function Prototypes
+void input(int &female, int &male);
+void punnett(int female, int male);
+
+int main() {
+    int female, male;
+
+    // Opening screen display
+    cout << "  _________________________________________  \n";
+    cout << " |                                         | \n";
+    cout << " |  This program determines the chances of | \n";
+    cout << " |  a child inheriting colorblindness      | \n";
+    cout << " |  based on parental genetic traits.      | \n";
+    cout << " |_________________________________________| \n\n";
+
+    // Calls input function
+    input(female, male);
+
+    // Calls Punnett square function
+    punnett(female, male);
+
+    return 0;
+}
+
+// Function to take user input
+void input(int &female, int &male) {
+    cout << "Enter the mother's genetic type:\n";
+    cout << "1. Normal Vision\n";
+    cout << "2. Carrier (XBXb)\n";
+    cout << "3. Colorblind (XbXb)\n";
+    cout << "Choice (1-3): ";
+    cin >> female;
+
+    // Input validation for female
+    while (cin.fail() || female < 1 || female > 3) {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Invalid input! Please enter 1, 2, or 3: ";
+        cin >> female;
+    }
+
+    cout << "\nEnter the father's genetic type:\n";
+    cout << "1. Normal Vision (XBY)\n";
+    cout << "2. Colorblind (XbY)\n";
+    cout << "Choice (1-2): ";
+    cin >> male;
+
+    // Input validation for male
+    while (cin.fail() || male < 1 || male > 2) {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Invalid input! Please enter 1 or 2: ";
+        cin >> male;
+    }
+
+    cout << endl;
+}
+
+// Function to display Punnett square based on input
+void punnett(int female, int male) {
+    cout << "     Possible Offspring Genotypes\n";
+    cout << "  __________________________________\n";
+
+    if (female == 1) {
+        if (male == 1) {
+            cout << "           XB             XB       "<< endl;
+            cout << "    _______________________________"<< endl;
+            cout << " XB |     XBXB     |     XBXB     |\n";
+            cout << "    |______________|______________|\n";
+            cout << " Y  |     XBY      |     XBY      |\n";
+            cout << "    |______________|______________|\n";
+            cout << "  (All children will have normal vision)\n";
+        }
+        else {
+            cout << "  |     XBXb     |     XBXb     |\n";
+            cout << "  |______________|______________|\n";
+            cout << "  |     XbY      |     XbY      |\n";
+            cout << "  |______________|______________|\n";
+            cout << "  (Daughters: 100% carriers, Sons: 100% colorblind)\n";
+        }
+    }
+    else if (female == 2) {
+        if (male == 1) {
+            cout << "  |     XBXB     |     XBXb     |\n";
+            cout << "  |______________|______________|\n";
+            cout << "  |     XBY      |     XbY      |\n";
+            cout << "  |______________|______________|\n";
+            cout << "  (Daughters: 50% normal, 50% carriers)\n";
+            cout << "  (Sons: 50% normal, 50% colorblind)\n";
+        }
+        else {
+            cout << "  |     XBXb     |     XbXb     |\n";
+            cout << "  |______________|______________|\n";
+            cout << "  |     XbY      |     XbY      |\n";
+            cout << "  |______________|______________|\n";
+            cout << "  (Daughters: 50% carriers, 50% colorblind)\n";
+            cout << "  (Sons: 100% colorblind)\n";
+        }
+    }
+    else {
+        if (male == 1) {
+            cout << "  |     XBXb     |     XBXb     |\n";
+            cout << "  |______________|______________|\n";
+            cout << "  |     XbY      |     XbY      |\n";
+            cout << "  |______________|______________|\n";
+            cout << "  (Daughters: 100% carriers, Sons: 100% colorblind)\n";
+        }
+        else {
+            cout << "  |     XbXb     |     XbXb     |\n";
+            cout << "  |______________|______________|\n";
+            cout << "  |     XbY      |     XbY      |\n";
+            cout << "  |______________|______________|\n";
+            cout << "  (All children will be colorblind)\n";
+        }
+    }
+}
